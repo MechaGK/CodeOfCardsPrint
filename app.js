@@ -8,33 +8,52 @@
 		return xhr;
 	}
 
-	function frequencySum() {
-		var sum = 0;
+	function ajaxCallsAllDone(statementCardsTsv, hackCardsTsv) {
 
-		for (var i = cards.length - 1; i >= 0; i--) {
-			sum += cards[i].rarity;
-		}
-
-		return sum;
-	}
-
-	function calcCardsCount() {
-		frequencySum = frequencySum();
-
-		for (var i = cards.length - 1; i >= 0; i--) {
-			cards[i].count = Math.floor( (cards[i].rarity / frequencySum) * decksize )
-		}
-	}
-
-	document.addEventListener("DOMContentLoaded", function(event) {
 		var decksize = 150;
-		var csvCardData;
 
-		getRequest("DUMMY_URL", function(e) {
-			console.log(e);
-		})
+		function frequencySum() {
+			var sum = 0;
 
-		cards = [ { text: "DrawCard(Self)", rarity: 10}, { text: "DrawCard(Other)", rarity: 10}, {text: "Function.Cycles--", rarity: 5}];
+			for (var i = cards.length - 1; i >= 0; i--) {
+				sum += cards[i].frequency;
+			}
+
+			return sum;
+		}
+
+		function calcCardsCount() {
+			frequencySum = frequencySum();
+			var relativeFrequency;
+
+			for (var i = cards.length - 1; i >= 0; i--) {
+				relativeFrequency = (cards[i].frequency / frequencySum);
+				cards[i].count = Math.floor( relativeFrequency * decksize );
+			}
+		}
+
+		function tsvParse(tsv) {
+			var result = [];
+			var rows = tsv.split("\n");
+			var rowCells;
+			var cell;
+
+			for (var i = 1; i < rows.length; ++i) {
+				rowCells = rows[i].split("\t");
+				cell = {"text": rowCells[0].trim(), "description": rowCells[1].trim(), "frequency": parseInt(rowCells[2])};
+				result.push(cell);
+			}
+
+			return result;
+		}
+
+		var statementCards = tsvParse(statementCardsTsv);
+		var hackCards = tsvParse(hackCardsTsv);
+
+		console.log(statementCards);
+		console.log(hackCards);
+
+		window.cards = cards = statementCards;//[ { text: "DrawCard(Self)", rarity: 10}, { text: "DrawCard(Other)", rarity: 10}, {text: "Function.Cycles--", rarity: 5}];
 
 		calcCardsCount();
 
@@ -62,5 +81,37 @@
 		}
 
 		document.body.appendChild(pageElement);
+	}
+
+	document.addEventListener("DOMContentLoaded", function(event) {
+		var ajaxCallsDone = 0;
+		var ajaxCallsTotal = 2;
+
+		var statementCardsTsv, hackCardsTsv;
+		
+		getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=568311885&single=true&output=tsv",
+		function(e) {
+			statementCardsTsv = e.target.response;
+
+			ajaxCallsDone++;
+			if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
+		});
+
+		getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=65795990&single=true&output=tsv",
+		function(e) {
+			hackCardsTsv = e.target.response;
+
+			ajaxCallsDone++;
+			if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
+		});
+
+		// TODO(jakob): event cards doesn't have an occurance column
+		// getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=484803621&single=true&output=tsv",
+		// function(e) {
+		// 	eventCardsTsv = e.tartget.response;
+
+		// 	ajaxCallsDone++;
+		// 	if (ajaxCallsDone > ajaxCallsTotal)	ajaxCallsAllDone();
+		// });
 	});
 })();
