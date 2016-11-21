@@ -1,0 +1,40 @@
+*, *:before, *:after { box-sizing: border-box; }
+
+@page {
+	size: A4;
+	margin: 0mm;
+}
+
+/*	@page :left {
+	margin-left:;
+}
+*/
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.page {
+	margin: 0;
+	padding: 4.5mm;
+	width: 210mm;
+	height: 297mm;
+	page-break-after: always;
+}
+
+.card {
+	padding: 3mm;
+	width: 33.333333333%;
+	height: 10%;
+	border: 1px solid black;
+	font-family: Courier;
+	font-size: 16px;
+	float: left;
+}
+
+.page:after {
+	content: "";
+	display: block;
+	clear: both;
+}
