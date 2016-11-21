@@ -28,6 +28,11 @@
 
 	document.addEventListener("DOMContentLoaded", function(event) {
 		var decksize = 150;
+		var csvCardData;
+
+		getRequest("DUMMY_URL", function(e) {
+			console.log(e);
+		})
 
 		cards = [ { text: "DrawCard(Self)", rarity: 10}, { text: "DrawCard(Other)", rarity: 10}, {text: "Function.Cycles--", rarity: 5}];
 
