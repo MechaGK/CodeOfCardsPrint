@@ -89,7 +89,7 @@
 
 		var statementCardsTsv, hackCardsTsv;
 		
-		getRequest("/data/statements.tsv",
+		getRequest("data/statements.tsv",
 			function(e) {
 				statementCardsTsv = e.target.response;
 
@@ -97,7 +97,7 @@
 				if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
 			});
 
-		getRequest("/data/hacks.tsv",
+		getRequest("data/hacks.tsv",
 			function(e) {
 				hackCardsTsv = e.target.response;
 
