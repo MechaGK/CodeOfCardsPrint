@@ -89,21 +89,21 @@
 
 		var statementCardsTsv, hackCardsTsv;
 		
-		getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=568311885&single=true&output=tsv",
-		function(e) {
-			statementCardsTsv = e.target.response;
+		getRequest("/data/statements.tsv",
+			function(e) {
+				statementCardsTsv = e.target.response;
 
-			ajaxCallsDone++;
-			if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
-		});
+				ajaxCallsDone++;
+				if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
+			});
 
-		getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=65795990&single=true&output=tsv",
-		function(e) {
-			hackCardsTsv = e.target.response;
+		getRequest("/data/hacks.tsv",
+			function(e) {
+				hackCardsTsv = e.target.response;
 
-			ajaxCallsDone++;
-			if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
-		});
+				ajaxCallsDone++;
+				if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
+			});
 
 		// TODO(jakob): event cards doesn't have an occurance column
 		// getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=484803621&single=true&output=tsv",
