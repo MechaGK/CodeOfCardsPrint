@@ -53,7 +53,7 @@
 		console.log(statementCards);
 		console.log(hackCards);
 
-		window.cards = cards = statementCards;//[ { text: "DrawCard(Self)", rarity: 10}, { text: "DrawCard(Other)", rarity: 10}, {text: "Function.Cycles--", rarity: 5}];
+		window.cards = cards = statementCards.concat(hackCards);//[ { text: "DrawCard(Self)", rarity: 10}, { text: "DrawCard(Other)", rarity: 10}, {text: "Function.Cycles--", rarity: 5}];
 
 		calcCardsCount();
 
@@ -73,7 +73,7 @@
 
 				var div = document.createElement("div");
 				div.className = "card";
-				div.innerHTML = cards[i].text + " " + (j+1);
+				div.innerHTML = ["<strong>", cards[i].text, "</strong><br><br>", "<small>", cards[i].description,"</small>"].join("");
 
 				pageElement.appendChild(div);
 				counter++;
