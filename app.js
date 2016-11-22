@@ -34,7 +34,7 @@
 					continue;
 				}
 
-				console.log(cards[i].type)
+				console.log(cards[i].type);
 				if (cards[i].type != type) continue;
 				relativeFrequency = (cards[i].frequency / freqSum);
 				cards[i].count = Math.round( relativeFrequency * decksize[type] );
@@ -42,9 +42,10 @@
 		}
 
 		function calcCardsCountAll() {
-			calcCardsCount("statement")
-			calcCardsCount("hack")
-			calcCardsCount("event")
+			calcCardsCount("statement");
+			calcCardsCount("hack");
+			calcCardsCount("event");
+			calcCardsCount("controlflow");
 		}
 
 		var cards = JSON.parse(cards_data);
@@ -84,9 +85,9 @@
 
 				pageElement.appendChild(cardElement);
 
-				cardElement.appendChild(backgroundElement)
+				cardElement.appendChild(backgroundElement);
 				cardElement.appendChild(textElement);
-				cardElement.appendChild(descriptionElement)
+				cardElement.appendChild(descriptionElement);
 
 				counter++;
 				finalCounter++;
