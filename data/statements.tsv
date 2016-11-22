@@ -1,12 +1,12 @@
-Card name	Card description	Frequency 
-RemoveCycles(Function, 1)	Decrement function cycles	4
-Damage(Other, 1)	Decrement Other Life with 1	10
-Other.DiscardCard()	Other must discard a card	8
-Self.DiscardCard()	Self must discard a card	8
-Other.DrawCard()	Other draws a card	6
-Self.DrawCard()	Self draw a card	6
-AddCycles(Function, 2)	Increment function cycles	6
-Heal(Other, 1)	Increment Other life with 1	6
-Heal(Self, 1)	Increment Self life with 1	6
-Repeat 3	Repeats code 3 times	6
-Repeat 5	Repeats code 5 times	2
+Card name	Card description	Frequency	Deck
+RemoveCycles(Function, 1)	Decrement function cycles	4	0
+Damage(Other, 1)	Decrement Other Life with 1	10	0
+Other.DiscardCard()	Other must discard a card	8	0
+Self.DiscardCard()	Self must discard a card	8	0
+Other.DrawCard()	Other draws a card	6	0
+Self.DrawCard()	Self draw a card	6	0
+AddCycles(Function, 2)	Increment function cycles	6	0
+Heal(Other, 1)	Increment Other life with 1	6	0
+Heal(Self, 1)	Increment Self life with 1	6	0
+Repeat 3	Repeats code 3 times	6	0
+Repeat 5	Repeats code 5 times	2	0
