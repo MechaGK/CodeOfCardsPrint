@@ -1,22 +1,28 @@
-Card name	Card description	Frequency	Deck
-RemoveCycles(Function, 1)	Decrement function cycles	4	code
-Damage(Other, 1)	Decrement Other Life with 1	10	code
-Other.DiscardCard()	Other must discard a card	8	code
-Self.DiscardCard()	Self must discard a card	8	code
-Other.DrawCard()	Other draws a card	6	code
-Self.DrawCard()	Self draw a card	6	code
-AddCycles(Function, 2)	Increment function cycles	6	code
-Heal(Other, 1)	Increment Other life with 1	6	code
-Heal(Self, 1)	Increment Self life with 1	6	code
-Repeat 3	Repeats code 3 times	6	code
-Repeat 5	Repeats code 5 times	2	code
-delete Card	Remove code from function	6	hacks
-Function(Self, Other)	Execute one of your function	8	hacks
-Function(Other, Self)	Execute one of your function with Other as Self and Self as Other	8	hacks
-AddCycles(Function, 10)	Adds 10 cycles to ANY function	6	hacks
-RemoveCycles(Function, 10)	Removes 10 cycles from ANY function	6	hacks
-Place(Card, Function)	Place a card in ANY function	6	hacks
-skip Code	Attach to ANY code and skip next time it is executed	10	hacks
-break execution	Stops execution of ANY function	6	hacks
-redirect execution	Swap Self and Other	4	hacks
-take ownership	Steal ANY function	1	hacks
+Card name	Card description	Frequency	Type	Deck
+RemoveCycles(Function, 1)	Decrement function cycles	4	statement	code
+Damage(Other, 1)	Decrement Other Life with 1	10	statement	code
+Other.DiscardCard()	Other must discard a card	8	statement	code
+Self.DiscardCard()	Self must discard a card	8	statement	code
+Other.DrawCard()	Other draws a card	6	statement	code
+Self.DrawCard()	Self draw a card	6	statement	code
+AddCycles(Function, 2)	Increment function cycles	6	statement	code
+Heal(Other, 1)	Increment Other life with 1	6	statement	code
+Heal(Self, 1)	Increment Self life with 1	6	statement	code
+Repeat 3	Repeats code 3 times	6	controlflow	code
+Repeat 5	Repeats code 5 times	2	controlflow	code
+delete Card	Remove code from function	6	hack	hacks
+Function(Self, Other)	Execute one of your function	8	hack	hacks
+Function(Other, Self)	Execute one of your function with Other as Self and Self as Other	8	hack	hacks
+AddCycles(Function, 10)	Adds 10 cycles to ANY function	6	hack	hacks
+RemoveCycles(Function, 10)	Removes 10 cycles from ANY function	6	hack	hacks
+Place(Card, Function)	Place a card in ANY function	6	hack	hacks
+skip Code	Attach to ANY code and skip next time it is executed	10	hack	hacks
+break execution	Stops execution of ANY function	6	hack	hacks
+redirect execution	Swap Self and Other	4	hack	hacks
+take ownership	Steal ANY function	1	hack	hacks
+On Action Draw	When a player draws a card for an action	1	event	events
+On Code Played	When a code card has been played	1	event	events
+On Hack Played	When a hack has been played	1	event	events
+On Card Discarded	When a card has been discarded	1	event	events
+On Turn Start	When a player's turn start	1	event	events
+On Turn End	When a player's turn end	1	event	events
