@@ -11,21 +11,21 @@
 	function ajaxCallsAllDone(cards_data) {
 		console.log(cards_data)
 
-		var decksize = 150;
+		var decksize = {"statement": 100, "hack": 60};
 
-		function frequencySum() {
+		function frequencySum(type) {
 			var sum = 0;
 
 			for (var i = cards.length - 1; i >= 0; i--) {
-				if (cards[i].type == "event") continue;
+				if (cards[i].type != type) continue;
 				sum += cards[i].frequency;
 			}
 
 			return sum;
 		}
 
-		function calcCardsCount() {
-			frequencySum = frequencySum();
+		function calcCardsCount(type) {
+			var freqSum = frequencySum(type);
 			var relativeFrequency;
 
 			for (var i = cards.length - 1; i >= 0; i--) {
@@ -33,17 +33,27 @@
 					cards[i].count = 1;
 					continue;
 				}
-				relativeFrequency = (cards[i].frequency / frequencySum);
-				cards[i].count = Math.floor( relativeFrequency * decksize );
+
+				console.log(cards[i].type)
+				if (cards[i].type != type) continue;
+				relativeFrequency = (cards[i].frequency / freqSum);
+				cards[i].count = Math.round( relativeFrequency * decksize[type] );
 			}
+		}
+
+		function calcCardsCountAll() {
+			calcCardsCount("statement")
+			calcCardsCount("hack")
+			calcCardsCount("event")
 		}
 
 		var cards = JSON.parse(cards_data);
 		console.log(cards);
 
-		calcCardsCount();
+		calcCardsCountAll();
 
 		var counter = 0;
+		var finalCounter = 0;
 		var pageElement = document.createElement("div");
 		pageElement.className = "page";
 
@@ -79,8 +89,11 @@
 				div.appendChild(descriptionElement)
 
 				counter++;
+				finalCounter++;
 			}
 		}
+
+		console.log(finalCounter);
 
 		document.body.appendChild(pageElement);
 	}
