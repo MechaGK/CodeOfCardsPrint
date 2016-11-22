@@ -57,13 +57,13 @@
     "description": "Repeats code 3 times",
     "frequency": 6,
     "text": "Repeat 3",
-    "type": "statement"
+    "type": "controlflow"
   },
   {
     "description": "Repeats code 5 times",
     "frequency": 2,
     "text": "Repeat 5",
-    "type": "statement"
+    "type": "controlflow"
   },
   {
     "description": "Remove code from function",
