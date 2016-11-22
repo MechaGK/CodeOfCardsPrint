@@ -40,10 +40,10 @@ body {
 	float: left;
 }
 
-.card.card-type-statement { background: white; }
-.card.card-type-controlflow { background: #B3F4E6; }
-.card.card-type-hack { background: #FFCCCC; }
-.card.card-type-event { background: #6EC7E8; }
+.card-type-statement { background-color: white; }
+.card-type-controlflow { background-color: #B3F4E6; }
+.card-type-hack { background-color: #FFCCCC; }
+.card-type-event { background-color: #6EC7E8; }
 
 .text {
 	font-size: 14px;
