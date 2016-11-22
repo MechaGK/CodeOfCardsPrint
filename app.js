@@ -37,7 +37,7 @@
 				console.log(cards[i].type);
 				if (cards[i].type != type) continue;
 				relativeFrequency = (cards[i].frequency / freqSum);
-				cards[i].count = Math.round( relativeFrequency * decksize[type] );
+				cards[i].count = Math.round( relativeFrequency * decksize[(type != "hack")? "statement": "hack"] );
 			}
 		}
 
