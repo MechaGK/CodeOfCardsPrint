@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import urllib.request
 import json
 
@@ -6,7 +7,7 @@ hacks_sheet = "https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8
 events_sheet = "https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=484803621&single=true&output=tsv"
 
 # Getting statements
-print("Getting statements from Google Sheets...")
+print("Getting statements from Google Sheets...", end=" ")
 response = urllib.request.urlopen(statements_sheet)
 print(response.getcode())
 
@@ -14,7 +15,7 @@ statements_tsv = response.read().decode("utf-8")
 print("Successfully got statements")
 
 # Getting hacks
-print("Getting hacks from Google Sheets...")
+print("Getting hacks from Google Sheets...", end=" ")
 response = urllib.request.urlopen(hacks_sheet)
 print(response.getcode())
 
@@ -22,7 +23,7 @@ hacks_tsv = response.read().decode("utf-8")
 print("Successfully got hacks")
 
 # Getting events
-print("Getting events from Google Sheets...")
+print("Getting events from Google Sheets...", end=" ")
 response = urllib.request.urlopen(events_sheet)
 print(response.getcode())
 
@@ -34,9 +35,7 @@ statements_list = statements_tsv.split('\r\n')
 hacks_list = hacks_tsv.split('\r\n')
 events_list = events_tsv.split('\r\n')
 
-statements = []
-hacks = []
-events = []
+cards = []
 
 for row in statements_list[1:]:
 	statement = {}
@@ -45,8 +44,9 @@ for row in statements_list[1:]:
 	statement["text"] = cells[0]
 	statement["description"] = cells[1]
 	statement["frequency"] = int(cells[2])
+	statement["type"] = "statement"
 
-	statements.append(statement)
+	cards.append(statement)
 
 for row in hacks_list[1:]:
 	hack = {}
@@ -54,18 +54,20 @@ for row in hacks_list[1:]:
 	hack["text"] = cells[0]
 	hack["description"] = cells[1]
 	hack["frequency"] = int(cells[2])
+	hack["type"] = "hack"
 
-	hacks.append(hack)
+	cards.append(hack)
 
 for row in events_list[1:]:
 	event = {}
 	cells = row.split('\t')
 	event["text"] = cells[0]
 	event["description"] = cells[1]
+	event["type"] = "event"
 
-	events.append(event)
+	cards.append(event)
 
-jsonContent = json.dumps({'statements': statements, 'hacks': hacks, 'events': events}, sort_keys=True, indent=2)
+jsonContent = json.dumps(cards, sort_keys=True, indent=2)
 
 print("Saving json")
 f = open('data/cards.json', 'w')

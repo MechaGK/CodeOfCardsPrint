@@ -8,7 +8,8 @@
 		return xhr;
 	}
 
-	function ajaxCallsAllDone(statementCardsTsv, hackCardsTsv) {
+	function ajaxCallsAllDone(cards_data) {
+		console.log(cards_data)
 
 		var decksize = 150;
 
@@ -16,6 +17,7 @@
 			var sum = 0;
 
 			for (var i = cards.length - 1; i >= 0; i--) {
+				if (cards[i].type == "event") continue;
 				sum += cards[i].frequency;
 			}
 
@@ -27,33 +29,17 @@
 			var relativeFrequency;
 
 			for (var i = cards.length - 1; i >= 0; i--) {
+				if (cards[i].type == "event") {
+					cards[i].count = 1;
+					continue;
+				}
 				relativeFrequency = (cards[i].frequency / frequencySum);
 				cards[i].count = Math.floor( relativeFrequency * decksize );
 			}
 		}
 
-		function tsvParse(tsv) {
-			var result = [];
-			var rows = tsv.split("\n");
-			var rowCells;
-			var cell;
-
-			for (var i = 1; i < rows.length; ++i) {
-				rowCells = rows[i].split("\t");
-				cell = {"text": rowCells[0].trim(), "description": rowCells[1].trim(), "frequency": parseInt(rowCells[2])};
-				result.push(cell);
-			}
-
-			return result;
-		}
-
-		var statementCards = tsvParse(statementCardsTsv);
-		var hackCards = tsvParse(hackCardsTsv);
-
-		console.log(statementCards);
-		console.log(hackCards);
-
-		window.cards = cards = statementCards.concat(hackCards);//[ { text: "DrawCard(Self)", rarity: 10}, { text: "DrawCard(Other)", rarity: 10}, {text: "Function.Cycles--", rarity: 5}];
+		var cards = JSON.parse(cards_data);
+		console.log(cards);
 
 		calcCardsCount();
 
@@ -73,9 +59,25 @@
 
 				var div = document.createElement("div");
 				div.className = "card";
-				div.innerHTML = ["<strong>", cards[i].text, "</strong><br><br>", "<small>", cards[i].description,"</small>"].join("");
+
+				var textElement = document.createElement("span");
+				textElement.innerHTML = cards[i].text;
+				textElement.className = "text";
+
+				var descriptionElement = document.createElement("span");
+				descriptionElement.innerHTML = cards[i].description;
+				descriptionElement.className = "description";
+
+				var backgroundElement = document.createElement("span");
+				backgroundElement.innerHTML = cards[i].type;
+				backgroundElement.className = "background";
 
 				pageElement.appendChild(div);
+
+				div.appendChild(backgroundElement)
+				div.appendChild(textElement);
+				div.appendChild(descriptionElement)
+
 				counter++;
 			}
 		}
@@ -84,34 +86,11 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", function(event) {
-		var ajaxCallsDone = 0;
-		var ajaxCallsTotal = 2;
-
-		var statementCardsTsv, hackCardsTsv;
-		
-		getRequest("data/statements.tsv",
+		getRequest("data/cards.json",
 			function(e) {
-				statementCardsTsv = e.target.response;
+				var cards = e.target.response;
 
-				ajaxCallsDone++;
-				if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
+				ajaxCallsAllDone(cards);
 			});
-
-		getRequest("data/hacks.tsv",
-			function(e) {
-				hackCardsTsv = e.target.response;
-
-				ajaxCallsDone++;
-				if (ajaxCallsDone >= ajaxCallsTotal) ajaxCallsAllDone(statementCardsTsv, hackCardsTsv);
-			});
-
-		// TODO(jakob): event cards doesn't have an occurance column
-		// getRequest("https://docs.google.com/spreadsheets/d/1EPGT-rQ3ZZVdwJ9ynwHImz0V8JTM4AfSguATNVqDF10/pub?gid=484803621&single=true&output=tsv",
-		// function(e) {
-		// 	eventCardsTsv = e.tartget.response;
-
-		// 	ajaxCallsDone++;
-		// 	if (ajaxCallsDone > ajaxCallsTotal)	ajaxCallsAllDone();
-		// });
 	});
 })();

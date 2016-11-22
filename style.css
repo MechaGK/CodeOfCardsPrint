@@ -24,6 +24,7 @@ body {
 }
 
 .card {
+	position: relative;
 	padding: 3mm;
 	width: 33.333333333%;
 	height: 10%;
@@ -37,4 +38,34 @@ body {
 	content: "";
 	display: block;
 	clear: both;
+	margin-bottom: 12px;
+}
+
+.text {
+	font-size: 14px;
+	font-weight: 700;
+	width: 100%;
+	line-height: 2;
+}
+
+.description {
+	font-size: 10px;
+	line-height: 1.5;
+}
+
+.background {
+	width: calc(100% - 6mm);
+	height: calc(100% - 6mm);
+	display: table-cell;
+	position: absolute;
+	z-index: -1;
+	overflow: hidden;
+	font-size: 32px;
+	top: calc(50% - 16px);
+	text-align: center;
+	color: #cccccc;
+}
+
+span {
+	display: inline-block;
 }
