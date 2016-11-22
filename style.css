@@ -61,8 +61,8 @@ body {
 	z-index: -1;
 	overflow: hidden;
 	font-size: 32px;
-	top: calc(50% - 16px);
-	text-align: center;
+	top: calc(100% - 38px);
+	text-align: right;
 	color: #cccccc;
 }
 
