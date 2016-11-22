@@ -59,6 +59,7 @@
 		pageElement.className = "page";
 
 		for (var i = cards.length - 1; i >= 0; i--) {
+			console.log(cards[i].type + "-count: " + cards[i].count);
 			for (var j = cards[i].count - 1; j >= 0; j--) {
 				if (counter >= 30) {
 					document.body.appendChild(pageElement);
