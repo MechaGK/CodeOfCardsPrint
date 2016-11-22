@@ -67,8 +67,8 @@
 					counter = 0;
 				}
 
-				var div = document.createElement("div");
-				div.className = "card";
+				var cardElement = document.createElement("div");
+				cardElement.className = "card card-type-" + cards[i].type;
 
 				var textElement = document.createElement("span");
 				textElement.innerHTML = cards[i].text;
@@ -82,11 +82,11 @@
 				backgroundElement.innerHTML = cards[i].type;
 				backgroundElement.className = "background";
 
-				pageElement.appendChild(div);
+				pageElement.appendChild(cardElement);
 
-				div.appendChild(backgroundElement)
-				div.appendChild(textElement);
-				div.appendChild(descriptionElement)
+				cardElement.appendChild(backgroundElement)
+				cardElement.appendChild(textElement);
+				cardElement.appendChild(descriptionElement)
 
 				counter++;
 				finalCounter++;
