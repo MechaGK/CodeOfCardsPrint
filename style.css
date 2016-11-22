@@ -43,7 +43,7 @@ body {
 .card-type-statement { background-color: white; }
 .card-type-controlflow { background-color: #B3F4E6; }
 .card-type-hack { background-color: #FFCCCC; }
-.card-type-event { background-color: #6EC7E8; }
+.card-type-event { background-color: #D4FFFF; }
 
 .text {
 	font-size: 14px;
