@@ -22,6 +22,12 @@ body {
 	height: 297mm;
 	page-break-after: always;
 }
+.page:after {
+	content: "";
+	display: block;
+	clear: both;
+	margin-bottom: 12px;
+}
 
 .card {
 	position: relative;
@@ -34,12 +40,10 @@ body {
 	float: left;
 }
 
-.page:after {
-	content: "";
-	display: block;
-	clear: both;
-	margin-bottom: 12px;
-}
+.card.card-type-statement { background: white; }
+.card.card-type-controlflow { background: #B3F4E6; }
+.card.card-type-hack { background: #FFCCCC; }
+.card.card-type-event { background: #6EC7E8; }
 
 .text {
 	font-size: 14px;
