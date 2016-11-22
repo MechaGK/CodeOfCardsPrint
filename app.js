@@ -1,58 +1,27 @@
-(function () {
+document.addEventListener("DOMContentLoaded", function() {
 
-	function getRequest(url, success) {
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', url);
-		xhr.onload = success;
-		xhr.send();
-		return xhr;
-	}
+	getRequest("data/cards.tsv", function(e) {
+		
+		// We now have the TSV card data
+		var cardsTsv = e.target.response;
+		var cards = tsvParse(cardsTsv, ["text", "description", "frequency", "type", "deck"]);
 
-	function ajaxCallsAllDone(cards_data) {
-		console.log(cards_data)
+		// Calculate count of each card
+		var deckFrequencySums = calcDeckFrequencySums(cards);
+		var desiredDeckSizes = {"code": 100, "hacks": 60};
+		var i = cards.length - 1;
+		var card;
 
-		var decksize = {"statement": 100, "hack": 60};
+		for (; i >= 0; i--) {
+			card = cards[i];
 
-		function frequencySum(type) {
-			var sum = 0;
-
-			for (var i = cards.length - 1; i >= 0; i--) {
-				if (cards[i].type != type) continue;
-				sum += cards[i].frequency;
-			}
-
-			return sum;
+			cards[i].count = calcCardCount(
+				card,
+				deckFrequencySums[card.deck],
+				desiredDeckSizes[card.deck]); // :)
 		}
 
-		function calcCardsCount(type) {
-			var freqSum = frequencySum(type);
-			var relativeFrequency;
-
-			for (var i = cards.length - 1; i >= 0; i--) {
-				if (cards[i].type == "event") {
-					cards[i].count = 1;
-					continue;
-				}
-
-				console.log(cards[i].type);
-				if (cards[i].type != type) continue;
-				relativeFrequency = (cards[i].frequency / freqSum);
-				cards[i].count = Math.round( relativeFrequency * decksize[(type != "hack")? "statement": "hack"] );
-			}
-		}
-
-		function calcCardsCountAll() {
-			calcCardsCount("statement");
-			calcCardsCount("hack");
-			calcCardsCount("event");
-			calcCardsCount("controlflow");
-		}
-
-		var cards = JSON.parse(cards_data);
-		console.log(cards);
-
-		calcCardsCountAll();
-
+		// Construct the cards as html
 		var counter = 0;
 		var finalCounter = 0;
 		var pageElement = document.createElement("div");
@@ -98,14 +67,58 @@
 		console.log(finalCounter);
 
 		document.body.appendChild(pageElement);
+	});
+	
+	function getRequest(url, success) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', url);
+		xhr.onload = success;
+		xhr.send();
+		return xhr;
+	}
+	
+	function arrayToObj(arr, keys) {
+		var i = 0;
+		var result = {};
+		
+		for (; i < keys.length; ++i) {
+			result[keys[i]] = arr[i];
+		}
+		return result;
+	}
+	
+	function tsvParse(tsv, columnKeys) {
+		var rows = tsv.split("\n");
+		var result = [];
+		var i = 1; // skip first row which is just the column labels
+		var l = rows.length;
+		
+		for (; i < l; ++i) {
+			result.push(arrayToObj(rows[i].split("\t"), columnKeys));
+		}
+		return result;
 	}
 
-	document.addEventListener("DOMContentLoaded", function(event) {
-		getRequest("data/cards.json",
-			function(e) {
-				var cards = e.target.response;
+	function calcDeckFrequencySums(cards) {
+		var result = {};
+		var card, deck;
 
-				ajaxCallsAllDone(cards);
-			});
-	});
-})();
+		for (var i = cards.length - 1; i >= 0; i--) {
+			card = cards[i];
+			deck = card.deck;
+
+			result[deck] = (result[deck] || 0) + cards[i].frequency;
+		}
+
+		return result;
+	}
+
+	function calcCardCount(card, deckFrequencySum, desiredDeckSize) {
+		if (card.type == "event") { return 1; }
+
+		console.log(card.type);
+		var relativeFrequency = (card.frequency / deckFrequencySum);
+
+		return Math.round( relativeFrequency * desiredDeckSize);
+	}
+});
