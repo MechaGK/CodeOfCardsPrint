@@ -6,10 +6,15 @@
 	margin: 0mm;
 }
 
-/*	@page :left {
-	margin-left:;
+@media print {
+	.hide-print {
+		display: none;
+	}
 }
-*/
+
+.hide-print {
+	padding: 5mm;
+}
 
 body {
 	margin: 0;
@@ -63,4 +68,15 @@ body {
 
 span {
 	display: inline-block;
+}
+
+#rules {
+	page-break-after: always;
+	padding: 4.5mm;
+	font-family: sans-serif;
+	max-width: 210mm;
+}
+
+#rules h1, h3 {
+	margin-bottom: 2mm;
 }

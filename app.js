@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
-
 	getRequest("data/cards.tsv", function(e) {
+		var link = document.querySelector('link[rel="import"]');
+		var template = link.import.querySelector('template');
+		var clone = document.importNode(template.content, true);
+
+		document.querySelector('#rules').appendChild(clone);
+
 	// (function(){
 		
 		// We now have the TSV card data
