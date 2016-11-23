@@ -127,6 +127,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log(card.type);
 		var relativeFrequency = (card.frequency / deckFrequencySum);
 
-		return Math.round( relativeFrequency * desiredDeckSize);
+		return Math.max(Math.round( relativeFrequency * desiredDeckSize), 1);
 	}
 });
