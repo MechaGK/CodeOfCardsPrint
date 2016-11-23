@@ -1,14 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
-	var isColor = true;
+	var noColor = false;
+	var rulesNotPrint = false;
 
-	document.getElementById("colorButton").onclick = function () {
-		if (isColor) {
-			document.body.className = "";
-			isColor = false;
+	document.getElementById("noColorsCheckbox").onclick = function () {
+		if (noColor) {
+			document.body.className = "color";
+			noColor = false;
 		}
 		else {
-			document.body.className = "color";
-			isColor = true;
+			document.body.className = "";
+			noColor = true;
+		}
+	};
+
+	document.getElementById("rulesNotPrintCheckbox").onchange = function () {
+		if (rulesNotPrint) {
+			document.querySelector('#rules').className = "";
+			rulesNotPrint = false;
+		}
+		else {
+			document.querySelector('#rules').className = "hide-print";
+			rulesNotPrint = true;
 		}
 	};
 
