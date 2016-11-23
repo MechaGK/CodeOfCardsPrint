@@ -1,0 +1,4 @@
+.card-type-statement { background-color: white; }
+.card-type-controlflow { background-color: #dfd; }
+.card-type-hack { background-color: #fdd; }
+.card-type-event { background-color: #dff; }
