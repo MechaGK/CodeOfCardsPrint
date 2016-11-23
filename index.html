@@ -8,14 +8,22 @@
 <body class="color">
 	<div id="rules">
 		<!--<a class="hide-print" href="bw-index.html">Switch to black and white version</a>-->
-		<button id="colorButton">Switch color/black and white</button>
+		<button class="hide-print" id="colorButton">Switch color/black and white</button>
 
 		<h1>Code of Cards</h1>
 		A board game about coding and hacking to defeat your opponents.
 		<h3>Purpose of game</h3>
 		The goal of the game is to be the last person reaching 0 power/energy/health/life
 		<h3>Game setup</h3>
-		All events are placed where everyone can reach them. Code and hack cards are shuffled in their respective decks. Every player starts with 30 power and five code cards and two hack cards. 
+		All events are placed where everyone can reach them. Code and hack cards are shuffled in their respective decks. Every player starts with 30 power and draws five code cards and two hack cards. 
+		<h3>Player's turn</h3>
+		If any code is placed in the On Turn Start function it will execute now. Afterwards the player loses three power. A player can do three actions in their turn, or execute a function as their only action. The three actions are:
+		<ul>
+			<li>Draw a cards. This actiavetes the On Draw event</li>
+			<li>Place a code card in a function. This activates the On Play Code event</li>
+			<li>Play a hack. This activates the On Play Hack event</li>
+		</ul> 
+		When the player ends their turn or they have done three actions, their turn ends and On Turn Ends is activated.
 	</div>
 	<script type="text/javascript" src="app.js">
 	</script>
