@@ -22,7 +22,6 @@ body {
 	width: 210mm;
 	height: 297mm;
 	page-break-after: always;
-	background-color: #ccc;
 }
 .page:after {
 	content: "";
