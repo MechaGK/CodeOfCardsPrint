@@ -30,21 +30,21 @@ body {
 	width: 33.333333333%;
 	height: 10%;
 	border: 1px solid black;
-	font-family: Courier;
-	font-size: 16px;
+	font-family: 'Inconsolata', monospace;
+	font-size: 24px;
 	float: left;
 	-webkit-print-color-adjust: exact;
 }
 
 .text {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 700;
 	width: 100%;
-	line-height: 2;
+	line-height: 1.5;
 }
 
 .description {
-	font-size: 10px;
+	font-size: 12px;
 	line-height: 1.5;
 }
 
@@ -63,7 +63,7 @@ span {
 #rules {
 	page-break-after: always;
 	padding: 4.5mm;
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
 	max-width: 210mm;
 	line-height: 1.5;
 }
