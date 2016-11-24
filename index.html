@@ -19,18 +19,30 @@
 
 		<h1>Code of Cards</h1>
 		A board game about coding and hacking to defeat your opponents.
+
 		<h3>Purpose of game</h3>
 		The goal of the game is to be the last person reaching 0 power
+
 		<h3>Game setup</h3>
-		All events are placed where everyone can reach them. Code and hack cards are shuffled in their respective decks. Every player starts with 30 power and draws five code cards and two hack cards. 
+		All events are placed where everyone can reach them. Code and hack cards are shuffled in their respective decks. Every player starts with 30 power and draws five code cards and two hack cards. Two function cards are placed at every player, these functions can only be executed by their owner and only their owner can execute them. 
+
 		<h3>Player's turn</h3>
-		If any code is placed in the On Turn Start function it will execute now. Afterwards the player loses three power. A player can do three actions in their turn, or execute a function as their only action. The three actions are:
+		If any code is placed in the On Turn Start function it will execute now. The player must now draw a code card and then place a code card in a event. Afterwards the player loses three power. A player can do three actions in their turn, or execute a function as their only action. The three actions are:
 		<ul>
-			<li>Draw a cards. This actiavetes the On Draw event</li>
+			<li>Draw a hack or code card. This actiavetes the On Draw event</li>
 			<li>Place a code card in a function. This activates the On Play Code event</li>
 			<li>Play a hack. This activates the On Play Hack event</li>
 		</ul> 
 		When the player ends their turn or they have done three actions, their turn ends and On Turn Ends is activated.
+
+		<h3>Functions</h3>
+		Functions starts with 10 cycles. When a function is executed its cycles are decreased by each statement run. If a function runs out of cycles, even if it is currently executed, it is cleared of code and its cycles is reset to 20.
+
+		<h3>Hacks</h3>
+		Hacks are cards that bend the rules. Card text always trump the rules. Hacks can always be played when a player plays a card or executes a function (but not when a event is executed) <i>interrupting</i> the play. A card that interrupts is executed before the interrupted play, but another hack card can be played by any player adding it to the interrupt. When no one wants to add any cards to a interrupt, the cards are executed with the last card first and original action last. Playing a hack outside ones turn or adding a hack to the interrupt does not count as an action and costs one power.
+
+		<h3>Events</h3>
+		Events are like functions, except they can't be executed directly, but triggers when specific things happens. Events start with 20 cycles. Everyone can place code in events.
 	</div>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/printOptions.js"></script>

@@ -1,4 +1,5 @@
 .color .card-type-statement { background-color: white; }
-.color .card-type-controlflow { background-color: #dfd; }
-.color .card-type-hack { background-color: #fdd; }
-.color .card-type-event { background-color: #dff; }
+.color .card-type-controlflow { background-color: #E8F5E9; }
+.color .card-type-hack { background-color: #FFEBEE; }
+.color .card-type-event { background-color: #E0F7FA; }
+.color .card-type-function { background-color: #E3F2FD; }
