@@ -80,6 +80,23 @@ span {
 	padding-left: 5mm;
 }
 
+#print-options {
+	padding: 2mm;
+	border: 1px solid #ddd;
+	line-height: 1.5;
+}
+
+#print-options .header {
+	display: block;
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 1mm;
+}
+
+#printButton {
+	margin-top: 1mm;
+}
+
 @media print {
 	.hide-print {
 		display: none;

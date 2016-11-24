@@ -1,29 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-	var noColor = false;
-	var rulesNotPrint = false;
-
-	document.getElementById("noColorsCheckbox").onclick = function () {
-		if (noColor) {
-			document.body.className = "color";
-			noColor = false;
-		}
-		else {
-			document.body.className = "";
-			noColor = true;
-		}
-	};
-
-	document.getElementById("rulesNotPrintCheckbox").onchange = function () {
-		if (rulesNotPrint) {
-			document.querySelector('#rules').className = "";
-			rulesNotPrint = false;
-		}
-		else {
-			document.querySelector('#rules').className = "hide-print";
-			rulesNotPrint = true;
-		}
-	};
-
 	getRequest("data/cards.tsv", function(e) {
 		// We now have the TSV card data
 		var cardsTsv = e.target.response;

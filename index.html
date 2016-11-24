@@ -2,19 +2,23 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="style-color.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style-color.css">
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto" rel="stylesheet">
 </head>
 <body class="color">
 	<div id="rules">
-		<span class="hide-print">No colors: <input type="checkbox" name="no-colors" id="noColorsCheckbox"/></span><br />
-		<span class="hide-print">Print without rules: <input type="checkbox" name="print-rules" id="rulesNotPrintCheckbox"/></span>
+		<div id="print-options" class="hide-print">
+			<span class="header">Options</span>
+			<span><input type="checkbox" name="no-colors" id="colorsCheck"/>Colors</span><br />
+			<span><input type="checkbox" name="print-rules" id="rulesCheck"/>Print rules</span><br />
+			<button id="printButton">Print</button>
+		</div>
 
 		<h1>Code of Cards</h1>
 		A board game about coding and hacking to defeat your opponents.
 		<h3>Purpose of game</h3>
-		The goal of the game is to be the last person reaching 0 power/energy/health/life
+		The goal of the game is to be the last person reaching 0 power
 		<h3>Game setup</h3>
 		All events are placed where everyone can reach them. Code and hack cards are shuffled in their respective decks. Every player starts with 30 power and draws five code cards and two hack cards. 
 		<h3>Player's turn</h3>
@@ -26,7 +30,7 @@
 		</ul> 
 		When the player ends their turn or they have done three actions, their turn ends and On Turn Ends is activated.
 	</div>
-	<script type="text/javascript" src="app.js">
-	</script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/printOptions.js"></script>
 </body>
 </html>
